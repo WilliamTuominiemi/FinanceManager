@@ -1,12 +1,26 @@
-﻿<Window x:Class="fima.MainWindow"
+﻿<Window x:Class="FinanceManager.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:fima"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Personal Finance Manager" Height="450" Width="800">
     <Grid>
-        <Button Name="buttonAddTransaction" Content="Add Transaction" Width="150" Height="30" Click="ButtonAddTransaction_Click" />
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal" Margin="10">
+            <Button Name="buttonAddTransaction" Content="Add Transaction" Width="120" Click="ButtonAddTransaction_Click" Margin="5"/>
+            <Button Name="buttonDeleteTransaction" Content="Delete Transaction" Width="120" Click="ButtonDeleteTransaction_Click" Margin="5"/>
+        </StackPanel>
+
+        <DataGrid Name="dataGridTransactions" Grid.Row="1" AutoGenerateColumns="False" CanUserAddRows="False" Margin="10">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="Auto"/>
+                <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="*"/>
+                <DataGridTextColumn Header="Amount" Binding="{Binding Amount}" Width="Auto"/>
+                <DataGridTextColumn Header="Date" Binding="{Binding Date}" Width="Auto"/>
+                <DataGridTextColumn Header="Category" Binding="{Binding Category}" Width="Auto"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Window>
