@@ -1,6 +1,6 @@
 using System;
 
-namespace FIMA.Models
+namespace fima.Models
 {
     public class Transaction
     {

@@ -1,2 +1,26 @@
+# Ignore build output directories
 bin/
 obj/
+
+# Ignore user-specific files
+*.user
+*.userosscache
+*.suo
+
+# Ignore IDE-specific files
+.vscode/
+.vs/
+
+# Ignore backup and temporary files
+*.bak
+*.swp
+*.tmp
+~$*
+
+# Ignore log files
+*.log
+
+# Ignore coverage reports
+coverage/
+*.coverage
+*.coveragexml
