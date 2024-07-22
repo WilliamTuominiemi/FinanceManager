@@ -1,3 +1,5 @@
+transactions.csv
+
 # Ignore build output directories
 bin/
 obj/
