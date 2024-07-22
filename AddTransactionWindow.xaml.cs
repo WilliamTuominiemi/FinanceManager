@@ -1,6 +1,6 @@
 using System;
 using System.Windows;
-using System.Windows.Controls; // Add this namespace
+using System.Windows.Controls;
 using FinanceManager.Models;
 
 namespace FinanceManager
@@ -20,7 +20,6 @@ namespace FinanceManager
             if (decimal.TryParse(textBoxAmount.Text, out decimal amount))
             {
                 Transaction.Description = textBoxDescription.Text;
-                Transaction.Category = ((ComboBoxItem)comboBoxCategory.SelectedItem)?.Content.ToString();
 
                 var transactionType = ((ComboBoxItem)comboBoxType.SelectedItem)?.Content.ToString();
                 if (transactionType == "Expense")
@@ -28,6 +27,19 @@ namespace FinanceManager
                     amount = -amount;
                 }
                 Transaction.Amount = amount;
+
+                if (transactionType == "Investment")
+                {
+                    if (decimal.TryParse(textBoxGrowthRate.Text, out decimal growthRate))
+                    {
+                        Transaction.GrowthRate = growthRate;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Please enter a valid growth rate.", "Invalid Input", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        return;
+                    }
+                }
 
                 DialogResult = true;
                 Close();
@@ -42,6 +54,21 @@ namespace FinanceManager
         {
             DialogResult = false;
             Close();
+        }
+
+        private void comboBoxType_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var selectedType = ((ComboBoxItem)comboBoxType.SelectedItem)?.Content.ToString();
+            if (selectedType == "Investment")
+            {
+                textBlockGrowthRate.Visibility = Visibility.Visible;
+                textBoxGrowthRate.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                textBlockGrowthRate.Visibility = Visibility.Collapsed;
+                textBoxGrowthRate.Visibility = Visibility.Collapsed;
+            }
         }
     }
 }

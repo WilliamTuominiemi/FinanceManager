@@ -47,10 +47,10 @@ namespace FinanceManager
         {
             using (var writer = new StreamWriter(filePath))
             {
-                writer.WriteLine("Id,Date,Description,Amount,Category");
+                writer.WriteLine("Id,Date,Description,Amount,GrowthRate");
                 foreach (var transaction in Transactions)
                 {
-                    writer.WriteLine($"{transaction.Id},{transaction.Date},{transaction.Description},{transaction.Amount},{transaction.Category}");
+                    writer.WriteLine($"{transaction.Id},{transaction.Date},{transaction.Description},{transaction.Amount},{transaction.GrowthRate?.ToString() ?? string.Empty}");
                 }
             }
         }
@@ -67,15 +67,30 @@ namespace FinanceManager
                 while ((line = reader.ReadLine()) != null)
                 {
                     var values = line.Split(',');
-                    var transaction = new Transaction
+
+                    if (values.Length < 5)
                     {
-                        Id = int.Parse(values[0]),
-                        Date = DateTime.Parse(values[1]),
-                        Description = values[2],
-                        Amount = decimal.Parse(values[3]),
-                        Category = values[4]
-                    };
-                    Transactions.Add(transaction);
+                        MessageBox.Show("Invalid data format in transactions file.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        continue; // Skip malformed lines
+                    }
+
+                    try
+                    {
+                        var transaction = new Transaction
+                        {
+                            Id = int.Parse(values[0]),
+                            Date = DateTime.Parse(values[1]),
+                            Description = values[2],
+                            Amount = decimal.Parse(values[3]),
+                            GrowthRate = string.IsNullOrWhiteSpace(values[4]) ? (decimal?)null : decimal.Parse(values[4])
+                        };
+                        Transactions.Add(transaction);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Error parsing transaction data: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        continue; // Skip the problematic line and continue
+                    }
                 }
             }
         }
