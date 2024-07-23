@@ -18,6 +18,7 @@ namespace FinanceManager
             InitializeComponent();
             Transactions = new ObservableCollection<Transaction>();
             LoadTransactions();
+            UpdateTotals();
             dataGridTransactions.ItemsSource = Transactions;
         }
 
@@ -29,6 +30,7 @@ namespace FinanceManager
             {
                 Transactions.Add(addTransactionWindow.Transaction);
                 SaveTransactions();
+                UpdateTotals();
                 dataGridTransactions.Items.Refresh();
             }
         }
@@ -40,6 +42,7 @@ namespace FinanceManager
             {
                 Transactions.Remove(selectedTransaction);
                 SaveTransactions();
+                UpdateTotals();
                 dataGridTransactions.Items.Refresh();
             }
         }
@@ -110,6 +113,17 @@ namespace FinanceManager
                     }
                 }
             }
+        }
+
+        private void UpdateTotals()
+        {
+            decimal totalIncome = Transactions.Where(t => t.Type == "Income").Sum(t => t.Amount);
+            decimal totalExpense = Transactions.Where(t => t.Type == "Expense").Sum(t => t.Amount);
+            decimal netProfitLoss = totalIncome + totalExpense;
+
+            textBlockTotalIncome.Text = totalIncome.ToString("C");
+            textBlockTotalExpense.Text = totalExpense.ToString("C");
+            textBlockNetProfitLoss.Text = netProfitLoss.ToString("C");
         }
     }
 }
