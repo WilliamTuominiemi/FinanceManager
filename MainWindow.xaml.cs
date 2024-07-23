@@ -119,11 +119,16 @@ namespace FinanceManager
         {
             decimal totalIncome = Transactions.Where(t => t.Type == "Income").Sum(t => t.Amount);
             decimal totalExpense = Transactions.Where(t => t.Type == "Expense").Sum(t => t.Amount);
+            decimal totalInvested = Transactions.Where(t => t.Type == "Investment").Sum(t => t.Amount);
             decimal netProfitLoss = totalIncome + totalExpense;
+            decimal liquidCash = netProfitLoss - totalInvested;
+
 
             textBlockTotalIncome.Text = totalIncome.ToString("C");
             textBlockTotalExpense.Text = totalExpense.ToString("C");
+            textBlockTotalInvested.Text = totalInvested.ToString("C");
             textBlockNetProfitLoss.Text = netProfitLoss.ToString("C");
+            textBlockNetLiquid.Text = liquidCash.ToString("C");
         }
     }
 }
