@@ -17,19 +17,19 @@
 
         <StackPanel Orientation="Horizontal" Margin="10" Grid.Row="1">
             <StackPanel Orientation="Vertical" Margin="5">
-                <TextBlock Text="Total Income:" VerticalAlignment="Center"/>
+                <TextBlock Text="Income:" VerticalAlignment="Center"/>
                 <TextBlock Name="textBlockTotalIncome" Width="100" Margin="5" VerticalAlignment="Center"/>
             </StackPanel>
             <StackPanel Orientation="Vertical" Margin="5">
-                <TextBlock Text="Total Expense:" VerticalAlignment="Center"/>
+                <TextBlock Text="Expenses:" VerticalAlignment="Center"/>
                 <TextBlock Name="textBlockTotalExpense" Width="100" Margin="5" VerticalAlignment="Center"/>
             </StackPanel>
             <StackPanel Orientation="Vertical" Margin="5">
-                <TextBlock Text="Total Invested:" VerticalAlignment="Center"/>
+                <TextBlock Text="Investments:" VerticalAlignment="Center"/>
                 <TextBlock Name="textBlockTotalInvested" Width="100" Margin="5" VerticalAlignment="Center"/>
             </StackPanel>
             <StackPanel Orientation="Vertical" Margin="5">
-                <TextBlock Text="Net Profit/Loss:" VerticalAlignment="Center"/>
+                <TextBlock Text="Net finances:" VerticalAlignment="Center"/>
                 <TextBlock Name="textBlockNetProfitLoss" Width="100" Margin="5" VerticalAlignment="Center"/>
             </StackPanel>
             <StackPanel Orientation="Vertical" Margin="5">
