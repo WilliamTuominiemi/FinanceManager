@@ -10,6 +10,7 @@
 
         <StackPanel Orientation="Horizontal" Margin="10">
             <Button Name="buttonAddTransaction" Content="Add Transaction" Width="120" Click="ButtonAddTransaction_Click" Margin="5"/>
+            <Button Name="buttonEditTransaction" Content="Edit Transaction" Width="120" Click="ButtonEditTransaction_Click" Margin="5"/>
             <Button Name="buttonDeleteTransaction" Content="Delete Transaction" Width="120" Click="ButtonDeleteTransaction_Click" Margin="5"/>
         </StackPanel>
 
@@ -17,6 +18,7 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="Auto"/>
                 <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="Auto"/>
+                <DataGridTextColumn Header="Type" Binding="{Binding Type}" Width="Auto"/>
                 <DataGridTextColumn Header="Amount" Binding="{Binding Amount}" Width="Auto"/>
                 <DataGridTextColumn Header="Date" Binding="{Binding Date}" Width="Auto"/>
             </DataGrid.Columns>

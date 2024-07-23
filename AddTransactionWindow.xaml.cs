@@ -22,6 +22,9 @@ namespace FinanceManager
                 Transaction.Description = textBoxDescription.Text;
 
                 var transactionType = ((ComboBoxItem)comboBoxType.SelectedItem)?.Content.ToString();
+
+                Transaction.Type = transactionType;
+
                 if (transactionType == "Expense")
                 {
                     amount = -amount;

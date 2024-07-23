@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Windows;
 using FinanceManager.Models;
@@ -9,13 +10,13 @@ namespace FinanceManager
 {
     public partial class MainWindow : Window
     {
-        private List<Transaction> Transactions { get; set; }
+        public ObservableCollection<Transaction> Transactions { get; set; }
         private string filePath = "transactions.csv";
 
         public MainWindow()
         {
             InitializeComponent();
-            Transactions = new List<Transaction>();
+            Transactions = new ObservableCollection<Transaction>();
             LoadTransactions();
             dataGridTransactions.ItemsSource = Transactions;
         }
@@ -43,14 +44,29 @@ namespace FinanceManager
             }
         }
 
+        private void ButtonEditTransaction_Click(object sender, RoutedEventArgs e)
+        {
+            var selectedTransaction = (Transaction)dataGridTransactions.SelectedItem;
+            if (selectedTransaction != null)
+            {
+                var editTransactionWindow = new EditTransactionWindow(selectedTransaction);
+                if (editTransactionWindow.ShowDialog() == true) 
+                {
+                    SaveTransactions();
+                    dataGridTransactions.Items.Refresh();
+                }
+            }
+        }
+
+
         private void SaveTransactions()
         {
             using (var writer = new StreamWriter(filePath))
             {
-                writer.WriteLine("Id,Date,Description,Amount,GrowthRate");
+                writer.WriteLine("Id,Date,Description,Amount,Type,GrowthRate");
                 foreach (var transaction in Transactions)
                 {
-                    writer.WriteLine($"{transaction.Id},{transaction.Date},{transaction.Description},{transaction.Amount},{transaction.GrowthRate?.ToString() ?? string.Empty}");
+                    writer.WriteLine($"{transaction.Id},{transaction.Date},{transaction.Description},{transaction.Amount},{transaction.Type},{transaction.GrowthRate?.ToString() ?? string.Empty}");
                 }
             }
         }
@@ -68,7 +84,7 @@ namespace FinanceManager
                 {
                     var values = line.Split(',');
 
-                    if (values.Length < 5)
+                    if (values.Length < 6)
                     {
                         MessageBox.Show("Invalid data format in transactions file.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                         continue; // Skip malformed lines
@@ -82,7 +98,8 @@ namespace FinanceManager
                             Date = DateTime.Parse(values[1]),
                             Description = values[2],
                             Amount = decimal.Parse(values[3]),
-                            GrowthRate = string.IsNullOrWhiteSpace(values[4]) ? (decimal?)null : decimal.Parse(values[4])
+                            Type = values[4],
+                            GrowthRate = string.IsNullOrWhiteSpace(values[5]) ? (decimal?)null : decimal.Parse(values[5])
                         };
                         Transactions.Add(transaction);
                     }
