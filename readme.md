@@ -1,5 +1,9 @@
-# Finance manager
+# Moolah - Finance manager
+
 This tool helps you track and manage your personal finances with ease. You can add, edit, and delete transactions, and view a summary of your income, expenses, and net profit/loss.
+
+![Finance manager](/assets/images/screenshot.png)
+
 ## Features
 
 1. **Add Transaction**: Easily add new transactions to keep your financial records up to date.
@@ -46,17 +50,18 @@ dotnet run
 ```
 
 ## Usage
+
 1. Adding a Transaction:
-    - Click on the "Add Transaction" button.
-    - Fill in the transaction details (Description, Amount, Type, Date).
-    - Click "OK" to save the transaction.
+   - Click on the "Add Transaction" button.
+   - Fill in the transaction details (Description, Amount, Type, Date).
+   - Click "OK" to save the transaction.
 2. Editing a Transaction:
-    - Select a transaction from the DataGrid.
-    - Click on the "Edit Transaction" button.
-    - Update the transaction details as needed.
-    - Click "OK" to save the changes.
+   - Select a transaction from the DataGrid.
+   - Click on the "Edit Transaction" button.
+   - Update the transaction details as needed.
+   - Click "OK" to save the changes.
 3. Deleting a Transaction:
-    - Select a transaction from the DataGrid.
-    - Click on the "Delete Transaction" button.
+   - Select a transaction from the DataGrid.
+   - Click on the "Delete Transaction" button.
 4. Viewing Summary:
-    - The total income, total expenses, and net profit/loss are displayed above the DataGrid for quick reference.
+   - The total income, total expenses, and net profit/loss are displayed above the DataGrid for quick reference.
